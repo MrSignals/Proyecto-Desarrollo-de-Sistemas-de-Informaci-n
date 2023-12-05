@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'MiPrimeraApp.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "proyecto",
+        "NAME": "ProyectoFC",
         "USER": "postgres",
         "PASSWORD": "1234",
         "HOST": "localhost",
