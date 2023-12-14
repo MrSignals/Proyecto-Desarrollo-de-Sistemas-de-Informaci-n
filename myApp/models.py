@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Proveedor(models.Model):
+    codigo_proveedor = models.CharField(max_length=20, unique=True, default="")
     nombre = models.CharField(max_length=100)
     direccion = models.TextField()
     telefono = models.CharField(max_length=20)

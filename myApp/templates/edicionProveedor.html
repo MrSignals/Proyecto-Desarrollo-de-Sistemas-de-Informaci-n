@@ -1,11 +1,12 @@
 {%extends "index.html"%} {%block title%} Gestión de Proveedores {%endblock%}
 {%block body%}
+
 <div class="row">
-  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-    <h2>Gestión de Proveedores</h2>
+  <div class="col-md-4 offset-md-4">
+    <h2>Editar Proveedor</h2>
     <div class="card">
       <div class="card-body">
-        <form action="/registrarProveedor/" method="POST">
+        <form action="/editarProveedor/" method="POST">
           {%csrf_token%}
           <div class="mb-3">
             <input
@@ -13,8 +14,9 @@
               id="codigo"
               name="codigo"
               class="form-control"
+              value="{{proveedor.codigo_proveedor}}"
               placeholder="Codigo"
-              required
+              readonly
             />
           </div>
           <div class="mb-3">
@@ -22,6 +24,7 @@
               type="text"
               id="nombre"
               name="nombre"
+              value="{{proveedor.nombre}}"
               class="form-control"
               placeholder="Nombre"
               required
@@ -32,6 +35,7 @@
             <input
               type="text"
               id="direccion"
+              value="{{proveedor.direccion}}"
               name="direccion"
               class="form-control"
               placeholder="Dirección"
@@ -43,6 +47,7 @@
               type="text"
               id="telefono"
               name="telefono"
+              value="{{proveedor.telefono}}"
               class="form-control"
               placeholder="Teléfono"
             />
@@ -56,47 +61,6 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
-    <h1>Listado de Proveedores</h1>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th colspan="">Opciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {%for p in proveedor%}
-          <tr>
-            <td>{{p.id}}</td>
-            <td>{{p.codigo_proveedor}}</td>
-            <td>{{p.nombre}}</td>
-            <td>{{p.direccion}}</td>
-            <td>{{p.telefono}}</td>
-            <td>
-              <a
-                href="/edicionProveedor/{{p.codigo_proveedor}}"
-                class="btn btn-info"
-                >Editar</a
-              >
-            </td>
-            <td>
-              <a
-                href="/eliminarProveedor/{{p.codigo_proveedor}}"
-                class="btn btn-danger"
-                >Eliminar</a
-              >
-            </td>
-          </tr>
-          {%endfor%}
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
+
 {%endblock%}
