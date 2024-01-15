@@ -1,12 +1,22 @@
 from django.shortcuts import render, redirect
-from .models import Proveedor
+from .models import Proveedor, ComponenteElectronico
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def proveedor(request):
     proveedor = Proveedor.objects.all()
-    return render(request, 'proveedor.html',{
+    return render(request,'proveedor.html',{
+        "proveedor": proveedor
+    })
+    
+        
+def products(request):
+    producto = ComponenteElectronico.objects.all()
+    proveedor = Proveedor.objects.all()
+    return render(request,'products.html',{
+        "producto": producto,
         "proveedor": proveedor
     })
 
@@ -32,6 +42,19 @@ def signup(request):
 
 
 def signin(request):
+    if request.method == 'POST':
+        usuario = request.POST['usuario']
+        contraseña1 = request.POST['contraseña1']
+        user = authenticate(username = usuario, password = contraseña1)
+        
+        if user is not None:
+            login(request, user)
+            nombre = request.POST['usuario']
+            return render(request, 'proveedor.html', {'nombre': nombre})
+        else:
+            messages.error(request, "Datos inválidos")
+            return redirect('home')
+            
     return render(request, 'signin.html')
 
 def signout(request):
@@ -67,6 +90,4 @@ def editarProveedor(request):
     proveedor.save()
     
     return redirect('/proveedor')
-    
-def products(request):
-    return render(request, 'products.html')
+
