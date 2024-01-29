@@ -6,7 +6,7 @@
     <h2>Gestión de Productos</h2>
     <div class="card">
       <div class="card-body">
-        <form action="/registrarProveedor/" method="POST">
+        <form action="/registrarProducto/" method="POST">
           {%csrf_token%}
           <div class="mb-3">
             <input
@@ -101,14 +101,14 @@
             <td>{{c.proveedor.nombre }}</td>
             <td>
               <a
-                href="/edicionProveedor/{{p.codigo_proveedor}}"
+                href="{% url 'edicionProducto' c.numero_de_serie %}"
                 class="btn btn-info"
                 >Editar</a
               >
             </td>
             <td>
               <a
-                href="/eliminarProveedor/{{p.codigo_proveedor}}"
+                href="/eliminarProducto/{{c.numero_de_serie}}"
                 class="btn btn-danger"
                 >Eliminar</a
               >
